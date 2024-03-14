@@ -60,7 +60,7 @@ public class SandpaperItemMixin extends Item {
 					damageDoneToEntity = 4;
 				}
 
-				hitPlayer.get(0).hurt(ModDamageTypes.SANDPAPER.source(worldIn), damageDoneToEntity);
+				hitPlayer.get(0).hurt(ModDamageTypes.sandpaper(worldIn), damageDoneToEntity);
 			}
 		}
 	}

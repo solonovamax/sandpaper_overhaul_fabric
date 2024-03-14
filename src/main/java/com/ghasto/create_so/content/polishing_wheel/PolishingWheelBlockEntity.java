@@ -53,13 +53,13 @@ public class PolishingWheelBlockEntity extends KineticBlockEntity {
     }
 
     public static int crushingIsFortunate(DamageSource source, LivingEntity target, int currentLevel, boolean recentlyHit) {
-        if (!AllDamageTypes.CRUSH.is(source))
+        if (!source.is(AllDamageTypes.CRUSH))
             return 0;
         return 2;
     }
 
     public static boolean handleCrushedMobDrops(LivingEntity target, DamageSource source, Collection<ItemEntity> drops, int lootingLevel, boolean recentlyHit) {
-        if (!AllDamageTypes.CRUSH.is(source))
+        if (!source.is(AllDamageTypes.CRUSH))
             return false;
         Vec3 outSpeed = Vec3.ZERO;
         for (ItemEntity outputItem : drops) {

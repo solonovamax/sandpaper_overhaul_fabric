@@ -4,6 +4,10 @@ package com.ghasto.create_so.util;
 import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 
+import com.simibubi.create.infrastructure.data.GeneratedEntriesProvider;
+
+import net.minecraft.Util;
+
 import org.jetbrains.annotations.NotNull;
 
 import com.ghasto.create_so.CreateSandpaperOverhaul;
@@ -17,15 +21,14 @@ import net.minecraft.data.DataProvider;
 import net.minecraft.data.PackOutput;
 
 public class DamageTypeDataProvider extends DatapackBuiltinEntriesProvider {
-	private static final RegistrySetBuilder BUILDER = new RegistrySetBuilder()
-			.add(Registries.DAMAGE_TYPE, ModDamageTypes::bootstrap);
+	private static final RegistrySetBuilder BUILDER = Util.make(new RegistrySetBuilder(), DamageTypeDataProvider::addBootstraps);
 
 	public DamageTypeDataProvider(PackOutput output, CompletableFuture<Provider> registries) {
 		super(output, registries, BUILDER, Set.of(CreateSandpaperOverhaul.ID));
 	}
 
-	public static DataProvider.Factory<DamageTypeDataProvider> makeFactory(CompletableFuture<Provider> registries) {
-		return output -> new DamageTypeDataProvider(output, registries);
+	public static void addBootstraps(RegistrySetBuilder builder) {
+		builder.add(Registries.DAMAGE_TYPE, ModDamageTypes::bootstrap);
 	}
 
 	@Override

@@ -1,5 +1,10 @@
 package com.ghasto.create_so;
 
+import com.simibubi.create.infrastructure.data.GeneratedEntriesProvider;
+
+import net.minecraft.core.RegistrySetBuilder;
+import net.minecraft.resources.ResourceKey;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -60,6 +65,12 @@ public class CreateSandpaperOverhaul implements ModInitializer, DataGeneratorEnt
 		ExistingFileHelper helper = ExistingFileHelper.withResourcesFromArg();
 		REGISTRATE.setupDatagen(pack, helper);
 		pack.addProvider(DamageTypeDataProvider::new);
+		pack.addProvider((output, future) -> new ModDamageTypeTagGen(output, future, helper));
+	}
+
+	@Override
+	public void buildRegistry(RegistrySetBuilder registryBuilder) {
+		DamageTypeDataProvider.addBootstraps(registryBuilder);
 	}
 
 	public static ResourceLocation id(String path) {
